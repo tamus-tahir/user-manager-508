@@ -126,6 +126,12 @@
                     <span>Dashboard</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="/config">
+                <i class="bi bi-gear"></i>
+                    <span>Config</span>
+                </a>
+            </li>
 
         </ul>
 
@@ -137,7 +143,7 @@
 
         <!-- Page Title -->
         <div class="pagetitle card p-4">
-            <h1>Blank Page</h1>
+            <h1><?= $title; ?></h1>
         </div>
         <!-- End Page Title -->
 
