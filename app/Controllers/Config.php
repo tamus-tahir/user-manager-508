@@ -33,11 +33,28 @@ class Config extends BaseController
             'keywords' => ['rules' => 'required', 'errors' => ['required' => 'keywords is required']],
             'author' => ['rules' => 'required', 'errors' => ['required' => 'author is required']],
             'description' => ['rules' => 'required', 'errors' => ['required' => 'description is required']],
+            'logo' => [
+                'rules' => 'max_size[logo,520]|is_image[logo]|mime_in[logo,image/jpg,image/jpeg,image/png]',
+                'errors' => [
+                    'max_size' => 'Logo is too large of a file.',
+                    'mime_in' => 'Logo does not have a valid mime type.',
+                    'is_image' => 'Logo is not a valid, uploaded image file.',
+                ]
+            ]
         ];
 
         if (!$this->validate($rules)) {
             session()->setFlashdata('error', 'Data gagal disimpan');
             return redirect()->to('config')->withInput();
+        }
+
+        $file = $this->request->getFile('logo');
+        if ($file->getError() == 4) {
+            $fileName = $this->request->getVar('logo_lama');
+        } else {
+            $file->move('assets/img', $file->getRandomName());
+            $fileName = $file->getName();
+            unlink('assets/img/' . $this->request->getVar('logo_lama'));
         }
 
         $data = [
@@ -47,6 +64,7 @@ class Config extends BaseController
             'keywords' => $this->request->getVar('keywords'),
             'author' => $this->request->getVar('author'),
             'description' => $this->request->getVar('description'),
+            'logo' => $fileName,
         ];
 
         $this->configModel->save($data);

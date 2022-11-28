@@ -1,7 +1,7 @@
 <?= $this->extend('layouts/index'); ?>
 
 <?= $this->section('content'); ?>
-<form class="row g-3 needs-validation" novalidate action="/config/update">
+<form class="row g-3 needs-validation" novalidate action="/config/update" enctype="multipart/form-data" method="post">
 
     <div class="col-md-4">
         <label for="appname" class="form-label">App Name <span class="text-danger">*</span></label>
@@ -34,6 +34,18 @@
         <div class="invalid-feedback"><?= $validation->getError('description') ? $validation->getError('description') : 'Please choose a description.'; ?></div>
     </div>
 
+    <div class="mb-3 col-md-4">
+        <label for="logo" class="form-label">Logo <span class="text-danger">(Type File JPG/JPEG,PNG, Max Size 500kb)</span></label>
+        <input class="form-control <?= $validation->hasError('logo') ? 'is-invalid' : ''; ?>" type="file" id="upload" name="logo">
+        <div class="valid-feedback">Looks good!</div>
+        <div class="invalid-feedback"><?= $validation->getError('logo') ?></div>
+        <div class="mt-3">
+            <img id="prev" src="/assets/img/<?= $config['logo']; ?>" height="270" width="100%" class="rounded">
+        </div>
+    </div>
+
+    <input type="hidden" name="logo_lama" value="<?= $config['logo']; ?>">
+
     <div class="col-12">
         <button class="btn btn-primary" type="submit">Submit form</button>
     </div>
@@ -45,5 +57,9 @@
 <?= $this->endSection(); ?>
 
 <?= $this->section('script'); ?>
-
+<script>
+    $("#upload").on('change', function() {
+        $("#prev").attr("src", URL.createObjectURL(event.target.files[0]));
+    })
+</script>
 <?= $this->endSection(); ?>
