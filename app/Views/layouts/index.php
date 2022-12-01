@@ -9,6 +9,10 @@
 
     $this->configModel = new ConfigModel();
     $config = $this->configModel->get();
+
+    $navigasi = getNavigasi();
+    $request = \Config\Services::request();
+    $url = $request->uri->getSegment(1);
     ?>
 
     <meta charset="utf-8">
@@ -34,7 +38,8 @@
     <link href="/assets/plugins/quill/quill.snow.css" rel="stylesheet">
     <link href="/assets/plugins/quill/quill.bubble.css" rel="stylesheet">
     <link href="/assets/plugins/remixicon/remixicon.css" rel="stylesheet">
-    <link href="/assets/plugins/simple-datatables/style.css" rel="stylesheet">
+    <!-- datatables -->
+    <link rel="stylesheet" href="/assets/plugins/datatables-bs5/dataTables.bootstrap5.min.css">
     <link href="/assets/plugins/sweetalert2/sweetalert2.css" rel="stylesheet">
 
     <!-- Template Main CSS File -->
@@ -133,27 +138,21 @@
     <aside id="sidebar" class="sidebar">
 
         <ul class="sidebar-nav" id="sidebar-nav">
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="/dashboard">
-                    <i class="bi bi-grid"></i>
-                    <span>Dashboard</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="/config">
-                    <i class="bi bi-gear"></i>
-                    <span>Config</span>
-                </a>
-            </li>
-
+            <?php foreach ($navigasi as $row) :  ?>
+                <li class="nav-item">
+                    <a class="nav-link  <?= $url == $row['url'] ? '' : 'collapsed'; ?>" href="/<?= $row['url']; ?>">
+                        <i class="<?= $row['icon']; ?>"></i>
+                        <span><?= $row['navigasi']; ?></span>
+                    </a>
+                </li>
+            <?php endforeach ?>
         </ul>
 
     </aside>
     <!-- End Sidebar-->
 
     <!-- #main -->
-    <main id="main" class="main">
+    <main id="main" class="main mb-5">
 
         <!-- Page Title -->
         <div class="pagetitle card p-4">
@@ -171,7 +170,7 @@
     <!-- End #main -->
 
     <!-- ======= Footer ======= -->
-    <footer id="footer" class="footer bg-white">
+    <footer id="footer" class="footer bg-white fixed-bottom ">
         <div class="copyright">
             <?= $config['copyright']; ?>
         </div>
@@ -189,10 +188,12 @@
     <script src="/assets/plugins/chart.js/chart.min.js"></script>
     <script src="/assets/plugins/echarts/echarts.min.js"></script>
     <script src="/assets/plugins/quill/quill.min.js"></script>
-    <script src="/assets/plugins/simple-datatables/simple-datatables.js"></script>
     <script src="/assets/plugins/tinymce/tinymce.min.js"></script>
     <script src="/assets/plugins/php-email-form/validate.js"></script>
     <script src="/assets/plugins/sweetalert2/sweetalert2.min.js"></script>
+    <!-- datatables -->
+    <script src="/assets/plugins/datatables-bs5/jquery.dataTables.min.js"></script>
+    <script src="/assets/plugins/datatables-bs5/dataTables.bootstrap5.min.js"></script>
 
     <!-- Template Main JS File -->
     <script src="/assets/js/main.js"></script>
