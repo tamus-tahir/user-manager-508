@@ -47,24 +47,6 @@
 
 <?= $this->section('script'); ?>
 <script>
-    $('#data-table').DataTable();
 
-    $('#button-delete').on('click', function(event) {
-        event.preventDefault();
-        const href = $(this).attr('href');
-        Swal.fire({
-            title: 'Anda Yakin?',
-            text: "Data akan Dihapus",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Ya, hapus data'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                document.location.href = href;
-            }
-        })
-    })
 </script>
 <?= $this->endSection(); ?>
