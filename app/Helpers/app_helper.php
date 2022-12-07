@@ -12,6 +12,6 @@ function checkAccess($id_profil, $id_navigasi)
     $akses = $db->table('tabel_akses')->getWhere(['id_profil' => $id_profil, 'id_navigasi' => $id_navigasi])->getResult();
 
     if (count($akses) > 0) {
-        return "checked='checked'";
+        return "checked";
     }
 }

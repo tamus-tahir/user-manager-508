@@ -48,7 +48,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="row g-3 needs-validation" novalidate action="/profil/save" method="post" id="form">
+                <form class="row g-3 needs-validation" novalidate action="" method="post" id="form">
 
                     <div class="mb-3">
                         <label for="profil" class="form-label">Profil <span class="text-danger">*</span></label>
@@ -72,7 +72,7 @@
 
 <?= $this->section('script'); ?>
 <script>
-    $('#btn-update').on('click', function() {
+    $('#data-table').on('click', '#btn-update', function() {
         $('#profil').val($(this).data('profil'))
         $('#form').attr('action', '/profil/update/' + $(this).data('id'))
     })
