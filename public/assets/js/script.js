@@ -35,3 +35,7 @@ $('#button-delete').on('click', function (event) {
         }
     })
 })
+
+$("#upload").on('change', function () {
+    $("#prev").attr("src", URL.createObjectURL(event.target.files[0]));
+})

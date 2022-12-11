@@ -15,3 +15,19 @@ function checkAccess($id_profil, $id_navigasi)
         return "checked";
     }
 }
+
+function upload($file, $oldName, $temp)
+{
+    if ($file->getError() == 4) {
+        $newName = $oldName;
+    } else {
+        $newName = $file->getRandomName();
+        $file->move($temp, $newName);
+
+        if ($oldName) {
+            unlink($temp . '/' . $oldName);
+        }
+    }
+
+    return $newName;
+}

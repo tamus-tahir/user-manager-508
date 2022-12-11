@@ -87,7 +87,6 @@ class Profil extends BaseController
             'title' => 'Akses Profil',
             'profil' => $this->profilModel->getId($id_profil),
             'navigasi' => $this->navigasiModel->get(),
-            'akses' => $this->aksesModel->getAksesProfil($id_profil),
         ];
         return view('profil/akses', $data);
     }

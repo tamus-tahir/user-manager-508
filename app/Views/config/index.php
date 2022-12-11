@@ -57,9 +57,5 @@
 <?= $this->endSection(); ?>
 
 <?= $this->section('script'); ?>
-<script>
-    $("#upload").on('change', function() {
-        $("#prev").attr("src", URL.createObjectURL(event.target.files[0]));
-    })
-</script>
+
 <?= $this->endSection(); ?>
